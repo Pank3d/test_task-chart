@@ -5,3 +5,4 @@ export * from './BaseDialog';
 export * from './DateRangePicker';
 export * from './BaseButton';
 export * from './BaseSelect';
+export * from './LazyLoader';
