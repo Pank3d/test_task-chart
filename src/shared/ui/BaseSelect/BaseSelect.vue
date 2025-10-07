@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import { VSelect } from 'vuetify/components';
-
-interface SelectOption {
-  title: string;
-  value: string;
-  icon?: string;
-}
+import type { SelectOption } from './types';
 
 interface Props {
-  modelValue: string;
+  modelValue: string | null;
   items: SelectOption[];
   prependInnerIcon?: string;
   placeholder?: string;
@@ -18,7 +13,7 @@ interface Props {
   maxWidth?: string;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   prependInnerIcon: undefined,
   placeholder: undefined,
   density: 'compact',
@@ -32,7 +27,13 @@ const emit = defineEmits<{
 }>();
 
 const handleChange = (value: string) => {
+  const selectedItem = props.items.find((item) => item.value === value);
+
   emit('update:modelValue', value);
+
+  if (selectedItem?.onClick) {
+    selectedItem.onClick();
+  }
 };
 </script>
 
@@ -46,7 +47,7 @@ const handleChange = (value: string) => {
     :variant="variant"
     :hide-details="hideDetails"
     :style="{ maxWidth }"
-    class="base-switch"
+    class="base-select"
     @update:model-value="handleChange"
   />
 </template>
@@ -54,7 +55,7 @@ const handleChange = (value: string) => {
 <style scoped lang="scss">
 @use '~/src/shared/ui/styles/vars' as *;
 
-.base-switch {
+.base-select {
   transition:
     background-color $transition-duration $transition-timing,
     color $transition-duration $transition-timing,
@@ -83,32 +84,6 @@ const handleChange = (value: string) => {
   :deep(.v-icon) {
     color: var(--color-text-primary);
     transition: color $transition-duration $transition-timing;
-  }
-
-  :deep(.v-list) {
-    background-color: var(--color-background-card);
-    transition: background-color $transition-duration $transition-timing;
-  }
-
-  :deep(.v-list-item) {
-    color: var(--color-text-primary);
-    transition:
-      background-color $transition-duration $transition-timing,
-      color $transition-duration $transition-timing;
-  }
-
-  :deep(.v-list-item:hover) {
-    background-color: var(--color-background-secondary);
-  }
-
-  :deep(.v-list-item--active) {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-  }
-
-  :deep(.v-overlay__content) {
-    background-color: var(--color-background-card);
-    transition: background-color $transition-duration $transition-timing;
   }
 }
 </style>

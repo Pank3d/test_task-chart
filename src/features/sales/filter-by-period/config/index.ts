@@ -1,1 +1,1 @@
-export { presets } from './presets';
+export { createPresets } from './presets';

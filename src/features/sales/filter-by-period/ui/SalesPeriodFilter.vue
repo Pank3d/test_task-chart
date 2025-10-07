@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { DateRangePicker, BaseDialog, BaseSwitch } from '~/src/shared/ui';
+import { DateRangePicker, BaseDialog, BaseSelect } from '~/src/shared/ui';
 import { usePeriodFilter } from '../model/usePeriodFilter';
 import type { PeriodPreset } from '../model/types';
-import { presets } from '../config';
 
 const emit = defineEmits<{
   'update:period': [start: Date | null, end: Date | null];
@@ -15,13 +14,17 @@ const openCustomDialog = () => {
   isDialogOpen.value = true;
 };
 
-const { state, setPreset, setCustomRange, formattedRange } = usePeriodFilter(openCustomDialog);
+const { state, setPreset, setCustomRange, formattedRange, presets } =
+  usePeriodFilter(openCustomDialog);
 
 const handlePresetChange = (value: string) => {
+  if (value === 'pickedCustom') {
+    return;
+  }
+
   const preset = value as PeriodPreset;
 
   if (preset === 'custom') {
-    openCustomDialog();
     setPreset(preset);
     return;
   }
@@ -41,7 +44,7 @@ const handleCustomRangeChange = (dateRange: { start: Date | null; end: Date | nu
   <ClientOnly>
     <div class="period-filter">
       <div class="d-flex flex-column ga-4">
-        <BaseSwitch
+        <BaseSelect
           :model-value="state.preset"
           :items="presets"
           @update:model-value="handlePresetChange"

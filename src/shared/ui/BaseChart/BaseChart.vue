@@ -54,7 +54,7 @@ defineProps<Props>();
 
   &__content {
     color: var(--color-text-primary);
-    min-height: 300px;
+    min-height: 500px;
     display: flex;
     align-items: center;
 

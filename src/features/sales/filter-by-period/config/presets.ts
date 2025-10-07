@@ -1,9 +1,9 @@
-import type { PeriodPreset } from '../model/types';
+import type { SelectOption } from '~/src/shared/ui';
 
-export const presets: Array<{ value: PeriodPreset; title: string }> = [
+export const createPresets = (onCustomClick: () => void): SelectOption[] => [
   { value: 'all', title: 'Все' },
   { value: 'today', title: 'Сегодня' },
   { value: 'week', title: 'Неделя' },
   { value: 'month', title: 'Месяц' },
-  { value: 'custom', title: 'Произвольный' },
+  { value: 'custom', title: 'Произвольный', onClick: onCustomClick },
 ];

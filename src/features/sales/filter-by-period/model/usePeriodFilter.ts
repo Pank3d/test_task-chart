@@ -1,6 +1,7 @@
-import { reactive, computed } from 'vue';
+import { reactive, computed, ref } from 'vue';
 import type { DateRange } from '~/src/shared';
 import type { PeriodPreset, PeriodFilterState } from './types';
+import { createPresets } from '../config/presets';
 
 export const usePeriodFilter = (onCustomClick?: () => void) => {
   const state = reactive<PeriodFilterState>({
@@ -10,6 +11,8 @@ export const usePeriodFilter = (onCustomClick?: () => void) => {
       end: null,
     },
   });
+
+  const hasPickedCustom = ref(false);
 
   const getStartOfDay = (date: Date): Date => {
     const newDate = new Date(date);
@@ -65,11 +68,12 @@ export const usePeriodFilter = (onCustomClick?: () => void) => {
   };
 
   const setCustomRange = (dateRange: DateRange) => {
-    state.preset = 'custom';
+    state.preset = 'pickedCustom';
     state.dateRange = {
       start: dateRange.start ? getStartOfDay(dateRange.start) : null,
       end: dateRange.end ? getEndOfDay(dateRange.end) : null,
     };
+    hasPickedCustom.value = true;
   };
 
   const presetHandlers: Record<PeriodPreset, () => void> = {
@@ -80,9 +84,13 @@ export const usePeriodFilter = (onCustomClick?: () => void) => {
     custom: () => {
       onCustomClick?.();
     },
+    pickedCustom: () => {},
   };
 
   const setPreset = (preset: PeriodPreset) => {
+    if (preset !== 'custom' && preset !== 'pickedCustom') {
+      hasPickedCustom.value = false;
+    }
     presetHandlers[preset]?.();
   };
 
@@ -109,6 +117,27 @@ export const usePeriodFilter = (onCustomClick?: () => void) => {
     return `${formatDate(start)} - ${formatDate(end)}`;
   });
 
+  const presets = computed(() => {
+    const basePresets = createPresets(onCustomClick || (() => {}));
+
+    if (hasPickedCustom.value) {
+      return [
+        ...basePresets.filter((p) => p.value !== 'custom'),
+        {
+          title: formattedRange.value || 'Выбранный период',
+          value: 'pickedCustom',
+        },
+        {
+          title: 'Произвольный',
+          value: 'custom',
+          onClick: onCustomClick,
+        },
+      ];
+    }
+
+    return basePresets;
+  });
+
   setAll();
 
   return {
@@ -116,5 +145,6 @@ export const usePeriodFilter = (onCustomClick?: () => void) => {
     setPreset,
     setCustomRange,
     formattedRange,
+    presets,
   };
 };

@@ -1,11 +1,11 @@
 import type { ChartOptions } from 'chart.js';
 import type { Theme } from '~/src/shared/config/types';
-import { getThemeConfig } from '~/src/shared/config/themes';
+import { getThemeConfig, DEFAULT_THEME } from '~/src/shared/config/themes';
 
 export const chartColors = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'];
 
-export const getChartOptions = (theme: Theme): ChartOptions<'line'> => {
-  const themeConfig = getThemeConfig(theme);
+export const getChartOptions = (theme?: Theme): ChartOptions<'line'> => {
+  const themeConfig = getThemeConfig(theme || DEFAULT_THEME);
   const { textColor, gridColor, tooltipBg, tooltipBorder } = themeConfig.colors;
 
   return {
