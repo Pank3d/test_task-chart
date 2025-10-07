@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import VueDatePicker from '@vuepic/vue-datepicker';
-import type { DateRange } from '~/src/shared/model/DateRangePicker/useDateRangePicker';
-import { useDateRange } from '~/src/shared/model/DateRangePicker';
+import { useDateRange, type DateRange } from '~/src/shared/model/DateRangePicker';
 
 interface Props {
   modelValue?: DateRange;

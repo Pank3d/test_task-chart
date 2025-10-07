@@ -1,35 +1,20 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { VContainer, VRow, VCol, VAlert } from 'vuetify/components';
 import { useSalesData, useSalesMetrics } from '~/src/entities';
 import { BaseCard, BaseChart, BaseLoader } from '~/src/shared/ui';
 import { SalesPeriodFilter } from '~/src/features/sales/filter-by-period';
 import { ThemeSwitcher, useTheme } from '~/src/features/theme-switcher';
-import { useChartData } from '../model';
+import { useChartData, useSalesDashboard, getMetricValue } from '../model';
 import { getChartOptions, metricsCards } from '../config';
 
 const { currentTheme } = useTheme();
-
-const startDate = ref<Date | null>(null);
-const endDate = ref<Date | null>(null);
-
-const salesParams = computed(() => ({
-  startDate: startDate.value,
-  endDate: endDate.value,
-}));
+const { salesParams, handlePeriodUpdate } = useSalesDashboard();
 
 const { data, isLoading, error } = useSalesData(salesParams);
-
 const metrics = computed(() => useSalesMetrics(data.value || []));
-
 const { chartData } = useChartData(metrics);
-
 const chartOptions = computed(() => getChartOptions(currentTheme.value));
-
-const handlePeriodUpdate = (start: Date | null, end: Date | null) => {
-  startDate.value = start;
-  endDate.value = end;
-};
 </script>
 
 <template>
@@ -66,7 +51,7 @@ const handlePeriodUpdate = (start: Date | null, end: Date | null) => {
         <VCol v-for="card in metricsCards" :key="card.key" cols="12" md="3">
           <BaseCard
             :subtitle="card.subtitle"
-            :title="card.formatter((metrics as any)[card.key]?.value || 0)"
+            :title="card.formatter(getMetricValue(metrics, card.key))"
           />
         </VCol>
       </VRow>

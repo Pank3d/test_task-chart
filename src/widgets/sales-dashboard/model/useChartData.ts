@@ -1,7 +1,7 @@
 import { computed, type ComputedRef } from 'vue';
 import type { ChartData } from 'chart.js';
 import { chartColors } from '../config';
-import type { SalesMetrics } from '../types';
+import type { SalesMetrics } from './types';
 
 export const useChartData = (metrics: ComputedRef<SalesMetrics>) => {
   const chartData = computed<ChartData<'line'>>(() => {

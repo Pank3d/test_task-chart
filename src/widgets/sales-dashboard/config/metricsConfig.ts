@@ -1,8 +1,4 @@
-export interface MetricCardConfig {
-  key: string;
-  subtitle: string;
-  formatter: (value: number) => string;
-}
+import type { MetricCardConfig } from './types';
 
 export const metricsCards: MetricCardConfig[] = [
   {

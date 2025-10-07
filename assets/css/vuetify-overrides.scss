@@ -35,3 +35,30 @@ h1, h2, h3, h4, h5, h6,
 .text-caption, .text-body-1, .text-body-2 {
   color: var(--color-text-secondary) !important;
 }
+
+.v-overlay {
+  .v-list {
+    background-color: var(--color-background-card) !important;
+    transition: background-color $transition-duration $transition-timing;
+  }
+
+  .v-list-item {
+    color: var(--color-text-primary) !important;
+    transition:
+      background-color $transition-duration $transition-timing,
+      color $transition-duration $transition-timing;
+
+    &:hover {
+      background-color: var(--color-background-secondary) !important;
+    }
+
+    &.v-list-item--active {
+      background-color: var(--color-primary) !important;
+      color: var(--color-white) !important;
+    }
+  }
+
+  .v-list-item-title {
+    color: inherit !important;
+  }
+}
