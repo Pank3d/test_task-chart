@@ -65,3 +65,35 @@ export const useDateRangePicker = (initialValue?: DateRange, mode: DateRangeMode
     formatDate,
   };
 };
+
+export const useDateRange = (
+  modelValue: DateRange,
+  emit: (event: 'update:modelValue', value: DateRange) => void
+) => {
+  const dateRange = computed({
+    get: () => {
+      if (!modelValue?.start) return null;
+      if (!modelValue?.end) return [modelValue.start];
+      return [modelValue.start, modelValue.end];
+    },
+    set: (value: Date[] | null) => {
+      if (!value || value.length === 0) {
+        emit('update:modelValue', { start: null, end: null });
+        return;
+      }
+
+      if (value.length === 1) {
+        emit('update:modelValue', { start: value[0] ?? null, end: null });
+        return;
+      }
+
+      if (value.length === 2) {
+        emit('update:modelValue', { start: value[0] ?? null, end: value[1] ?? null });
+      }
+    },
+  });
+
+  return {
+    dateRange,
+  };
+};

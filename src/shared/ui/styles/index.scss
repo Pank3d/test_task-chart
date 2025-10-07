@@ -2,6 +2,8 @@
 @use './themes/light.scss';
 @use './themes/dark.scss';
 
+@import '@vuepic/vue-datepicker/dist/main.css';
+
 body {
   background-color: var(--color-background-primary);
   color: var(--color-text-primary);

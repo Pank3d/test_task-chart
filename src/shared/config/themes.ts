@@ -8,11 +8,7 @@ export const THEMES_CONFIG = new Map<string, ThemeConfig>([
       name: 'Светлая',
       icon: 'mdi-weather-sunny',
       colors: {
-        chartColors: [
-          'rgb(29, 78, 216)', // Blue
-          'rgb(124, 58, 237)', // Purple
-          'rgb(245, 158, 11)', // Orange
-        ],
+        chartColors: ['rgb(29, 78, 216)', 'rgb(124, 58, 237)', 'rgb(245, 158, 11)'],
         textColor: '#212121',
         gridColor: 'rgba(0, 0, 0, 0.1)',
         tooltipBg: 'rgba(0, 0, 0, 0.8)',
@@ -27,11 +23,7 @@ export const THEMES_CONFIG = new Map<string, ThemeConfig>([
       name: 'Темная',
       icon: 'mdi-weather-night',
       colors: {
-        chartColors: [
-          'rgb(167, 139, 250)', // Purple
-          'rgb(59, 130, 246)', // Blue
-          'rgb(251, 191, 36)', // Amber
-        ],
+        chartColors: ['rgb(167, 139, 250)', 'rgb(59, 130, 246)', 'rgb(251, 191, 36)'],
         textColor: '#e6edf3',
         gridColor: 'rgba(48, 54, 61, 0.5)',
         tooltipBg: 'rgba(28, 33, 40, 0.95)',

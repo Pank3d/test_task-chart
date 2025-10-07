@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css';
 import type { DateRange } from '~/src/shared/model/DateRangePicker/useDateRangePicker';
+import { useDateRange } from '~/src/shared/model/DateRangePicker';
 
 interface Props {
   modelValue?: DateRange;
@@ -20,28 +19,7 @@ const emit = defineEmits<{
   'update:modelValue': [value: DateRange];
 }>();
 
-const dateRange = computed({
-  get: () => {
-    if (!props.modelValue?.start) return null;
-    if (!props.modelValue?.end) return [props.modelValue.start];
-    return [props.modelValue.start, props.modelValue.end];
-  },
-  set: (value: Date[] | null) => {
-    if (!value || value.length === 0) {
-      emit('update:modelValue', { start: null, end: null });
-      return;
-    }
-
-    if (value.length === 1) {
-      emit('update:modelValue', { start: value[0] ?? null, end: null });
-      return;
-    }
-
-    if (value.length === 2) {
-      emit('update:modelValue', { start: value[0] ?? null, end: value[1] ?? null });
-    }
-  },
-});
+const { dateRange } = useDateRange(props.modelValue || { start: null, end: null }, emit);
 </script>
 
 <template>
