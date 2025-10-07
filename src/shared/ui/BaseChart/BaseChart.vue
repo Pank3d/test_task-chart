@@ -54,6 +54,13 @@ defineProps<Props>();
 
   &__content {
     color: var(--color-text-primary);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+
+    canvas {
+      height: 100%;
+    }
   }
 }
 </style>

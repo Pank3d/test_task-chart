@@ -1,5 +1,7 @@
 @use '~/src/shared/ui/styles/vars' as *;
 
+
+// используем important для того чтобы перебить стили vuetify
 .text-primary {
   color: var(--color-text-primary) !important;
 }
@@ -28,11 +30,23 @@
   background-color: var(--color-background-card) !important;
 }
 
-h1, h2, h3, h4, h5, h6,
-.text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-h1,
+.text-h2,
+.text-h3,
+.text-h4,
+.text-h5,
+.text-h6 {
   color: var(--color-text-primary) !important;
 }
-.text-caption, .text-body-1, .text-body-2 {
+.text-caption,
+.text-body-1,
+.text-body-2 {
   color: var(--color-text-secondary) !important;
 }
 

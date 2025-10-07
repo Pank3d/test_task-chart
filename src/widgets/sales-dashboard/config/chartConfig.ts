@@ -10,7 +10,7 @@ export const getChartOptions = (theme: Theme): ChartOptions<'line'> => {
 
   return {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     interaction: {
       mode: 'nearest',
       intersect: true,
