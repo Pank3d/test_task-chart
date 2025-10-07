@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { VCard, VCardText, VBtnToggle, VBtn } from 'vuetify/components';
-import { DateRangePicker, BaseDialog } from '~/src/shared/ui';
+import { DateRangePicker, BaseDialog, BaseSwitch } from '~/src/shared/ui';
 import { usePeriodFilter, type PeriodPreset } from '../model/usePeriodFilter';
 
 const emit = defineEmits<{
@@ -16,28 +15,25 @@ const openCustomDialog = () => {
 
 const { state, setPreset, setCustomRange, formattedRange } = usePeriodFilter(openCustomDialog);
 
-const presets: Array<{ value: PeriodPreset; label: string }> = [
-  { value: 'all', label: 'Все' },
-  { value: 'today', label: 'Сегодня' },
-  { value: 'week', label: 'Неделя' },
-  { value: 'month', label: 'Месяц' },
-  { value: 'custom', label: 'Произвольный' },
+const presets: Array<{ value: PeriodPreset; title: string }> = [
+  { value: 'all', title: 'Все' },
+  { value: 'today', title: 'Сегодня' },
+  { value: 'week', title: 'Неделя' },
+  { value: 'month', title: 'Месяц' },
+  { value: 'custom', title: 'Произвольный' },
 ];
 
-const handlePresetChange = (preset: PeriodPreset) => {
-  const prevPreset = state.value.preset;
+const handlePresetChange = (value: string) => {
+  const preset = value as PeriodPreset;
 
-  // Если нажали на "Произвольный" повторно, открываем модалку снова
-  if (preset === 'custom' && prevPreset === 'custom') {
+  if (preset === 'custom') {
     openCustomDialog();
+    setPreset(preset);
     return;
   }
 
   setPreset(preset);
-
-  if (preset !== 'custom' && prevPreset !== preset) {
-    emit('update:period', state.value.dateRange.start, state.value.dateRange.end);
-  }
+  emit('update:period', state.value.dateRange.start, state.value.dateRange.end);
 };
 
 const handleCustomRangeChange = (dateRange: { start: Date | null; end: Date | null }) => {
@@ -49,29 +45,19 @@ const handleCustomRangeChange = (dateRange: { start: Date | null; end: Date | nu
 
 <template>
   <ClientOnly>
-    <VCard class="period-filter">
-      <VCardText>
-        <div class="d-flex flex-column ga-4">
-          <VBtnToggle
-            :model-value="state.preset"
-            mandatory
-            color="primary"
-            variant="outlined"
-            divided
-            class="period-filter__toggle"
-            @update:model-value="handlePresetChange"
-          >
-            <VBtn v-for="preset in presets" :key="preset.value" :value="preset.value" size="small">
-              {{ preset.label }}
-            </VBtn>
-          </VBtnToggle>
+    <div class="period-filter">
+      <div class="d-flex flex-column ga-4">
+        <BaseSwitch
+          :model-value="state.preset"
+          :items="presets"
+          @update:model-value="handlePresetChange"
+        />
 
-          <div v-if="formattedRange" class="period-filter__range-text">
-            Выбран период: {{ formattedRange }}
-          </div>
+        <div v-if="formattedRange" class="period-filter__range-text">
+          Выбран период: {{ formattedRange }}
         </div>
-      </VCardText>
-    </VCard>
+      </div>
+    </div>
 
     <BaseDialog v-model="isDialogOpen" title="Выберите период" max-width="500" max-heigth="600">
       <DateRangePicker
@@ -88,38 +74,11 @@ const handleCustomRangeChange = (dateRange: { start: Date | null; end: Date | nu
 @use '~/src/shared/ui/styles/vars' as *;
 
 .period-filter {
-  background-color: var(--color-background-card);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
-  transition:
-    background-color $transition-duration $transition-timing,
-    color $transition-duration $transition-timing,
-    border-color $transition-duration $transition-timing;
-
-  &__toggle {
-    :deep(.v-btn) {
-      color: var(--color-text-primary);
-      border-color: var(--color-border);
-      transition:
-        background-color $transition-duration $transition-timing,
-        color $transition-duration $transition-timing,
-        border-color $transition-duration $transition-timing;
-
-      &:hover {
-        background-color: var(--color-background-secondary);
-      }
-
-      &.v-btn--active {
-        background-color: var(--color-primary);
-        color: var(--color-white);
-      }
-    }
-  }
-
   &__range-text {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     color: var(--color-text-secondary);
     transition: color $transition-duration $transition-timing;
+    text-align: center;
   }
 }
 </style>
