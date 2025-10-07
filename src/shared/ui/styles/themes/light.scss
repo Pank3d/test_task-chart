@@ -1,0 +1,30 @@
+@use '../vars' as *;
+
+// Light Theme Variables
+$theme-light: (
+  background-primary: $color-white,
+  background-secondary: $color-grey-50,
+  background-card: $color-white,
+  text-primary: $color-black,
+  text-secondary: $color-grey-800,
+  text-disabled: $color-grey-300,
+  text-on-primary: $color-white,
+  primary: $color-blue-700,
+  primary-hover: $color-blue-hover-light,
+  secondary: $color-grey-800,
+  accent: $color-blue-500,
+  border: $color-grey-200,
+  divider: $color-grey-300,
+  success: $color-success,
+  warning: $color-warning,
+  error: $color-error,
+  info: $color-info,
+  shadow: rgba(0, 0, 0, 0.1),
+  white: $color-white,
+);
+
+:root[data-theme='light'] {
+  @each $name, $color in $theme-light {
+    --color-#{$name}: #{$color};
+  }
+}

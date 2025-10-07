@@ -1,0 +1,57 @@
+// Colors
+$color-white: #ffffff;
+$color-grey-50: #f9fafb;
+$color-grey-100: #f3f4f6;
+$color-grey-200: #e5e7eb;
+$color-grey-300: #d1d5db;
+$color-grey-800: #1f2937;
+$color-grey-900: #111827;
+$color-black: #212121;
+
+$color-blue-500: #3b82f6;
+$color-blue-600: #2563eb;
+$color-blue-700: #1d4ed8;
+$color-blue-hover-light: #1565c0;
+
+$color-purple-500: #a78bfa;
+$color-purple-600: #7c3aed;
+$color-purple-hover: #6d28d9;
+
+$color-dark-bg: #0d1117;
+$color-dark-surface: #161b22;
+$color-dark-card: #1c2128;
+$color-dark-border: #30363d;
+$color-dark-divider: #21262d;
+$color-dark-text: #e6edf3;
+$color-dark-text-secondary: #8b949e;
+$color-dark-text-disabled: #6e7681;
+
+$color-success: #4caf50;
+$color-success-dark: #3fb950;
+$color-error: #f44336;
+$color-error-dark: #f85149;
+$color-warning: #ff9800;
+$color-warning-dark: #d29922;
+$color-info: #2196f3;
+$color-info-dark: #58a6ff;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+// Transitions
+$transition-duration: 0.3s;
+$transition-timing: ease;

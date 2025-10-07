@@ -4,8 +4,11 @@ import { VContainer, VRow, VCol, VAlert } from 'vuetify/components';
 import { useSalesData, useSalesMetrics } from '~/src/entities';
 import { BaseCard, BaseChart, BaseLoader } from '~/src/shared/ui';
 import { SalesPeriodFilter } from '~/src/features/sales/filter-by-period';
+import { ThemeSwitcher, useTheme } from '~/src/features/theme-switcher';
 import { useChartData } from '../model';
-import { chartOptions, metricsCards } from '../config';
+import { getChartOptions, metricsCards } from '../config';
+
+const { currentTheme } = useTheme();
 
 const startDate = ref<Date | null>(null);
 const endDate = ref<Date | null>(null);
@@ -21,6 +24,8 @@ const metrics = computed(() => useSalesMetrics(data.value || []));
 
 const { chartData } = useChartData(metrics);
 
+const chartOptions = computed(() => getChartOptions(currentTheme.value));
+
 const handlePeriodUpdate = (start: Date | null, end: Date | null) => {
   startDate.value = start;
   endDate.value = end;
@@ -30,8 +35,9 @@ const handlePeriodUpdate = (start: Date | null, end: Date | null) => {
 <template>
   <VContainer>
     <VRow>
-      <VCol cols="12">
+      <VCol cols="12" class="d-flex justify-space-between align-center">
         <h1 class="text-h4 mb-4">Дашборд продаж</h1>
+        <ThemeSwitcher />
       </VCol>
     </VRow>
 
@@ -60,7 +66,7 @@ const handlePeriodUpdate = (start: Date | null, end: Date | null) => {
         <VCol v-for="card in metricsCards" :key="card.key" cols="12" md="3">
           <BaseCard
             :subtitle="card.subtitle"
-            :title="card.formatter((metrics as any)[card.key].value)"
+            :title="card.formatter((metrics as any)[card.key]?.value || 0)"
           />
         </VCol>
       </VRow>

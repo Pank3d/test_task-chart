@@ -45,8 +45,8 @@ const dateRange = computed({
 </script>
 
 <template>
-  <div>
-    <label v-if="label" class="text-caption text-grey mb-1 d-block">{{ label }}</label>
+  <div class="date-range-picker">
+    <label v-if="label" class="date-range-picker__label">{{ label }}</label>
     <VueDatePicker
       v-model="dateRange"
       range
@@ -62,24 +62,97 @@ const dateRange = computed({
 
 <style>
 .dp__menu {
-  z-index: 9999 !important;
+  z-index: 9999;
 }
 </style>
 
-<style scoped>
-:deep(.dp__input) {
-  border: 1px solid rgba(0, 0, 0, 0.38);
-  border-radius: 4px;
-  padding: 12px;
-  font-size: 16px;
+<style scoped lang="scss">
+@use '~/src/shared/ui/styles/vars' as *;
+
+.date-range-picker {
+  &__label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    transition: color $transition-duration $transition-timing;
+  }
 }
 
-:deep(.dp__input:hover) {
-  border-color: rgba(0, 0, 0, 0.87);
+:deep(.dp__input_wrap) {
+  .dp__input {
+    background-color: var(--color-background-card);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: $border-radius-sm;
+    padding: 12px;
+    font-size: 16px;
+    transition:
+      background-color $transition-duration $transition-timing,
+      color $transition-duration $transition-timing,
+      border-color $transition-duration $transition-timing;
+
+    &:hover {
+      border-color: var(--color-primary);
+    }
+
+    &:focus {
+      border-color: var(--color-primary);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--color-text-disabled);
+    }
+  }
 }
 
-:deep(.dp__input:focus) {
-  border-color: rgb(var(--v-theme-primary));
-  outline: none;
+:deep(.dp__menu) {
+  background-color: var(--color-background-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+:deep(.dp__calendar_header),
+:deep(.dp__calendar_header_item),
+:deep(.dp__cell_inner),
+:deep(.dp__month_year_select),
+:deep(.dp__calendar_item) {
+  color: var(--color-text-primary);
+}
+
+:deep(.dp__calendar_header_separator) {
+  background-color: var(--color-divider);
+}
+
+:deep(.dp__cell_inner:hover) {
+  background-color: var(--color-background-secondary);
+}
+
+:deep(.dp__active_date),
+:deep(.dp__range_start),
+:deep(.dp__range_end) {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+:deep(.dp__range_between) {
+  background-color: var(--color-background-secondary);
+}
+
+:deep(.dp__today) {
+  border: 1px solid var(--color-primary);
+}
+
+:deep(.dp__button) {
+  color: var(--color-primary);
+
+  &:hover {
+    background-color: var(--color-background-secondary);
+  }
+}
+
+:deep(.dp__disabled) {
+  color: var(--color-text-disabled);
 }
 </style>

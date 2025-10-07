@@ -1,0 +1,30 @@
+@use '../vars' as *;
+
+// Dark Blue-Purple Theme Variables
+$theme-dark: (
+  background-primary: $color-dark-bg,
+  background-secondary: $color-dark-surface,
+  background-card: $color-dark-card,
+  text-primary: $color-dark-text,
+  text-secondary: $color-dark-text-secondary,
+  text-disabled: $color-dark-text-disabled,
+  text-on-primary: $color-white,
+  primary: $color-purple-600,
+  primary-hover: $color-purple-hover,
+  secondary: $color-blue-500,
+  accent: $color-purple-500,
+  border: $color-dark-border,
+  divider: $color-dark-divider,
+  success: $color-success-dark,
+  warning: $color-warning-dark,
+  error: $color-error-dark,
+  info: $color-info-dark,
+  shadow: rgba(0, 0, 0, 0.3),
+  white: $color-white,
+);
+
+:root[data-theme='dark'] {
+  @each $name, $color in $theme-dark {
+    --color-#{$name}: #{$color};
+  }
+}

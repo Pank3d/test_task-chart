@@ -14,7 +14,6 @@ import {
 } from 'chart.js';
 import { VCard, VCardTitle, VCardText } from 'vuetify/components';
 
-// Регистрация компонентов Chart.js
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 interface Props {
@@ -27,12 +26,34 @@ defineProps<Props>();
 </script>
 
 <template>
-  <VCard>
-    <VCardTitle v-if="title">
+  <VCard class="base-chart">
+    <VCardTitle v-if="title" class="base-chart__title">
       {{ title }}
     </VCardTitle>
-    <VCardText>
-      <Line :data="data" :options="options" />
+    <VCardText class="base-chart__content">
+      <ClientOnly>
+        <Line :data="data" :options="options" />
+      </ClientOnly>
     </VCardText>
   </VCard>
 </template>
+
+<style scoped lang="scss">
+.base-chart {
+  background-color: var(--color-background-card);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+
+  &__title {
+    color: var(--color-text-primary);
+  }
+
+  &__content {
+    color: var(--color-text-primary);
+  }
+}
+</style>

@@ -1,0 +1,9 @@
+@use './vars' as *;
+@use './themes/light.scss';
+@use './themes/dark.scss';
+
+body {
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  transition: background-color $transition-duration $transition-timing, color $transition-duration $transition-timing;
+}

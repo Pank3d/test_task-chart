@@ -27,5 +27,9 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['@mdi/font/css/materialdesignicons.css'],
+  css: [
+    '@mdi/font/css/materialdesignicons.css',
+    '~/src/shared/ui/styles/index.scss',
+    '~/assets/css/vuetify-overrides.scss',
+  ],
 });

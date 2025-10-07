@@ -1,0 +1,37 @@
+@use '~/src/shared/ui/styles/vars' as *;
+
+.text-primary {
+  color: var(--color-text-primary) !important;
+}
+
+.text-secondary {
+  color: var(--color-text-secondary) !important;
+}
+
+.text-disabled {
+  color: var(--color-text-disabled) !important;
+}
+
+.text-grey {
+  color: var(--color-text-secondary) !important;
+}
+
+.bg-primary {
+  background-color: var(--color-background-primary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--color-background-secondary) !important;
+}
+
+.bg-card {
+  background-color: var(--color-background-card) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6 {
+  color: var(--color-text-primary) !important;
+}
+.text-caption, .text-body-1, .text-body-2 {
+  color: var(--color-text-secondary) !important;
+}
