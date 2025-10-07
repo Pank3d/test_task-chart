@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { LazyLoader } from '~/src/shared/ui';
-
-const SalesDashboard = () => import('~/src/widgets/sales-dashboard/ui/SalesDashboard.vue');
+import { SalesDashboard } from '~/src/widgets/sales-dashboard';
+import { ErrorBoundary } from '~/src/shared/ui';
 </script>
 
 <template>
-  <LazyLoader :loader="SalesDashboard" />
+  <ErrorBoundary fallback="Не удалось загрузить дашборд продаж">
+    <SalesDashboard />
+  </ErrorBoundary>
 </template>

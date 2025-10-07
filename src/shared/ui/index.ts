@@ -6,3 +6,4 @@ export * from './DateRangePicker';
 export * from './BaseButton';
 export * from './BaseSelect';
 export * from './LazyLoader';
+export * from './ErrorBoundary';

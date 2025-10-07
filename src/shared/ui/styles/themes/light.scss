@@ -22,6 +22,12 @@ $theme-light: (
   white: $color-white,
 );
 
+:root {
+  @each $name, $color in $theme-light {
+    --color-#{$name}: #{$color};
+  }
+}
+
 :root[data-theme='light'] {
   @each $name, $color in $theme-light {
     --color-#{$name}: #{$color};
