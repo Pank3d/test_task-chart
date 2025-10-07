@@ -1,11 +1,5 @@
 import { ref, computed } from 'vue';
-
-export interface DateRange {
-  start: Date | null;
-  end: Date | null;
-}
-
-export type DateRangeMode = 'single' | 'range';
+import type { DateRange, DateRangeMode } from './types';
 
 export const useDateRangePicker = (initialValue?: DateRange, mode: DateRangeMode = 'range') => {
   const internalDates = ref<Date[]>([]);

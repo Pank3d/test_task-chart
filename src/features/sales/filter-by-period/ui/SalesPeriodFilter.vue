@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { DateRangePicker, BaseDialog, BaseSwitch } from '~/src/shared/ui';
-import { usePeriodFilter, type PeriodPreset } from '../model/usePeriodFilter';
+import { usePeriodFilter } from '../model/usePeriodFilter';
+import type { PeriodPreset } from '../model/types';
+import { presets } from '../config';
 
 const emit = defineEmits<{
   'update:period': [start: Date | null, end: Date | null];
@@ -15,14 +17,6 @@ const openCustomDialog = () => {
 
 const { state, setPreset, setCustomRange, formattedRange } = usePeriodFilter(openCustomDialog);
 
-const presets: Array<{ value: PeriodPreset; title: string }> = [
-  { value: 'all', title: 'Все' },
-  { value: 'today', title: 'Сегодня' },
-  { value: 'week', title: 'Неделя' },
-  { value: 'month', title: 'Месяц' },
-  { value: 'custom', title: 'Произвольный' },
-];
-
 const handlePresetChange = (value: string) => {
   const preset = value as PeriodPreset;
 
@@ -33,12 +27,12 @@ const handlePresetChange = (value: string) => {
   }
 
   setPreset(preset);
-  emit('update:period', state.value.dateRange.start, state.value.dateRange.end);
+  emit('update:period', state.dateRange.start, state.dateRange.end);
 };
 
 const handleCustomRangeChange = (dateRange: { start: Date | null; end: Date | null }) => {
   setCustomRange(dateRange);
-  emit('update:period', state.value.dateRange.start, state.value.dateRange.end);
+  emit('update:period', state.dateRange.start, state.dateRange.end);
   isDialogOpen.value = false;
 };
 </script>
