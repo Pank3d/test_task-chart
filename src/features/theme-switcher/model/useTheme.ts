@@ -10,7 +10,7 @@ const getSavedTheme = (): Theme => {
   return savedTheme || DEFAULT_THEME;
 };
 
-const currentTheme = ref<Theme>(getSavedTheme());
+const currentTheme = ref<Theme>(DEFAULT_THEME);
 
 const availableThemes = getAvailableThemes();
 
@@ -43,8 +43,10 @@ const setTheme = (theme: Theme) => {
 };
 
 const initTheme = () => {
+  const savedTheme = getSavedTheme();
+  currentTheme.value = savedTheme;
   if (typeof document !== 'undefined') {
-    document.documentElement.setAttribute('data-theme', currentTheme.value);
+    document.documentElement.setAttribute('data-theme', savedTheme);
   }
 };
 

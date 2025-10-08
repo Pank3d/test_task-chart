@@ -19,7 +19,7 @@ $theme-dark: (
   error: $color-error-dark,
   info: $color-info-dark,
   shadow: rgba(0, 0, 0, 0.3),
-  white: $color-white,
+  "white": $color-white,
 );
 
 :root[data-theme='dark'] {

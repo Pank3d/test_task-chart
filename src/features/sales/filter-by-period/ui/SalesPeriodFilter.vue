@@ -41,30 +41,28 @@ const handleCustomRangeChange = (dateRange: { start: Date | null; end: Date | nu
 </script>
 
 <template>
-  <ClientOnly>
-    <div class="period-filter">
-      <div class="d-flex flex-column ga-4">
-        <BaseSelect
-          :model-value="state.preset"
-          :items="presets"
-          @update:model-value="handlePresetChange"
-        />
+  <div class="period-filter">
+    <div class="d-flex flex-column ga-4">
+      <BaseSelect
+        :model-value="state.preset"
+        :items="presets"
+        @update:model-value="handlePresetChange"
+      />
 
-        <div v-if="formattedRange" class="period-filter__range-text">
-          Выбран период: {{ formattedRange }}
-        </div>
+      <div v-if="formattedRange" class="period-filter__range-text">
+        Выбран период: {{ formattedRange }}
       </div>
     </div>
+  </div>
 
-    <BaseDialog v-model="isDialogOpen" title="Выберите период" max-width="500" max-heigth="600">
-      <DateRangePicker
-        :model-value="state.dateRange"
-        mode="range"
-        label="Выберите период"
-        @update:model-value="handleCustomRangeChange"
-      />
-    </BaseDialog>
-  </ClientOnly>
+  <BaseDialog v-model="isDialogOpen" title="Выберите период" max-width="500" max-heigth="600">
+    <DateRangePicker
+      :model-value="state.dateRange"
+      mode="range"
+      label="Выберите период"
+      @update:model-value="handleCustomRangeChange"
+    />
+  </BaseDialog>
 </template>
 
 <style scoped lang="scss">

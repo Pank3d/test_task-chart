@@ -31,9 +31,7 @@ defineProps<Props>();
       {{ title }}
     </VCardTitle>
     <VCardText class="base-chart__content">
-      <ClientOnly>
-        <Line :data="data" :options="options" />
-      </ClientOnly>
+      <Line :data="data" :options="options" />
     </VCardText>
   </VCard>
 </template>
