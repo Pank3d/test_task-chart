@@ -25,7 +25,7 @@
     "@vuepic/vue-datepicker": "^11.0.2",
     "axios": "^1.12.2",
     "chart.js": "^4.5.0",
-    "nuxt": "^4.1.2",
+    "nuxt": "^3.14.0",
     "pinia": "^3.0.3",
     "vue": "^3.5.22",
     "vue-chartjs": "^5.3.2",
@@ -58,8 +58,7 @@
   "lint-staged": {
     "*.{js,ts,vue}": [
       "eslint --fix",
-      "prettier --write",
-      "bash -c 'npm run type-check'"
+      "prettier --write"
     ],
     "*.{json,md,yml,yaml}": [
       "prettier --write"

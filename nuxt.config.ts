@@ -28,6 +28,9 @@ export default defineNuxtConfig({
     css: {
       devSourcemap: false,
     },
+    optimizeDeps: {
+      include: ['@pinia/colada'],
+    },
   },
 
   css: [
