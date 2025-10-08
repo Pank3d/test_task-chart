@@ -9,6 +9,12 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
 
+  components: {
+    transform: {
+      exclude: [/\x00/],
+    },
+  },
+
   modules: [
     '@pinia/nuxt',
     (_options, nuxt) => {
@@ -30,6 +36,11 @@ export default defineNuxtConfig({
     },
     optimizeDeps: {
       include: ['@pinia/colada'],
+    },
+    server: {
+      warmup: {
+        clientFiles: [],
+      },
     },
   },
 
